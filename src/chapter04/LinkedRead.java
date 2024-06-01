@@ -4,26 +4,53 @@ import java.util.Scanner;
 
 public class LinkedRead {
     public static void main(String[] args) {
-        Node<Integer> head = null;
-        Node<Integer> tail = null;
-        Node<Integer> cur = null;
+        SimpleList<Integer> list = new SimpleList<>();
 
         Scanner scanner  = new Scanner(System.in);
+        System.out.println("자연수 입력 : " );
 
         while(true) {
-            System.out.println("자연수 입력 : " );
             int data = scanner.nextInt();
-            if(data < 1) {
-                return ;
+            if(data < 0) {
+                break;
             }
+            list.LInsert(data);
+        }
 
-            Node<Integer> newNode = new Node(data);
-            if(head == null) {
-                head = newNode;
-            } else {
-                tail.next = newNode;
+        System.out.println("자연수 총 입력 개수 : " + list.getTotalCount());
+
+        if(list.LFirst()) {
+            System.out.print(list.getData());
+        }
+
+        while(list.LNext()) {
+            System.out.print(", " +list.getData());
+        }
+        System.out.println();
+        System.out.println("삭제할 데이터 입력 : ");
+        int input = scanner.nextInt();
+
+        Node delNode = null;
+        if(list.LFirst()) {
+            if(list.getData() == input) {
+                list.LRemove(delNode);
             }
-            tail = newNode;
+            delNode = list.getNode();
+        }
+
+        while(list.LNext()) {
+            if(list.getData() == input) {
+                list.LRemove(delNode);
+            }
+            delNode = list.getNode();
+        }
+
+        if(list.LFirst()) {
+            System.out.print(list.getData());
+        }
+
+        while(list.LNext()) {
+            System.out.print(", " +list.getData());
         }
     }
 }

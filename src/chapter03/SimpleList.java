@@ -16,7 +16,11 @@ public class SimpleList<T> {
         this.numOfData = 0;
         this.curPosition = -1;
     }
-
+    public SimpleList (Class clazz, int size) {
+        this.list = (T[]) Array.newInstance(clazz, size <= 0 ? DEFAULT_SIZE : size);
+        this.numOfData = 0;
+        this.curPosition = -1;
+    }
     public void LInsert(T data) {
         if(list.length <= numOfData) {
             System.out.println("저장이 불가능합니다.");
