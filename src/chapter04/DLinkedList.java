@@ -1,5 +1,7 @@
 package chapter04;
 
+import common.Node;
+
 import java.util.Comparator;
 
 public class DLinkedList<T> {

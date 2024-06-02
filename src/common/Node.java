@@ -1,4 +1,4 @@
-package chapter04;
+package common;
 
 public class Node<T> {
     public T data;

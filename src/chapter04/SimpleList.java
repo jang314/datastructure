@@ -1,5 +1,7 @@
 package chapter04;
 
+import common.Node;
+
 public class SimpleList<T> {
     private Node<T> head;
     private Node<T> cur;

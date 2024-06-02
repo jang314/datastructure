@@ -1,5 +1,7 @@
 package chapter04;
 
+import common.Node;
+
 import java.util.Scanner;
 
 public class LinkedRead {
