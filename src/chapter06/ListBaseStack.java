@@ -1,7 +1,6 @@
 package chapter06;
 
 import common.Node;
-import common.Stack;
 
 public class ListBaseStack<T> extends Stack<T> {
 

@@ -1,4 +1,6 @@
-package common;
+package chapter06;
+
+import common.Node;
 
 public abstract class Stack<T> {
     public Node head;

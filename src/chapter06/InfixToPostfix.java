@@ -1,7 +1,5 @@
 package chapter06;
 
-import common.Stack;
-
 public class InfixToPostfix {
     public static void main(String[] args) {
         String exA = "(1+2*3)/4";

@@ -1,7 +1,5 @@
 package chapter06;
 
-import common.Stack;
-
 import java.lang.reflect.Array;
 
 public class ArrayBaseStack<T> extends Stack<T> {

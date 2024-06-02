@@ -1,7 +1,5 @@
 package chapter06;
 
-import common.Stack;
-
 public class ListBaseStackMain {
     public static void main(String[] args) {
         Stack<Integer> stack = new ListBaseStack<>();
