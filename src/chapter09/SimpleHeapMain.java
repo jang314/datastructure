@@ -2,7 +2,6 @@ package chapter09;
 
 public class SimpleHeapMain {
     public static void main(String[] args) {
-
         Heap<Character> heap = new SimpleHeap<>(String.class);
 
         HeapElement<Character> element1 = new HeapElement<>('A', 1);
@@ -13,12 +12,9 @@ public class SimpleHeapMain {
         heap.hInsert(element2);
         heap.hInsert(element3);
 
-
-
         while(!heap.hIsEmpty()) {
             char delete = heap.hDelete(1);
             System.out.printf("%c " , delete);
         }
-
     }
 }

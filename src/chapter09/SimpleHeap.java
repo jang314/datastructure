@@ -7,7 +7,7 @@ public class SimpleHeap<T> extends Heap<T> {
 
     public SimpleHeap(Class cls) {
         super();
-        heapArray = (HeapElement[]) Array.newInstance(cls, DEFAULT_ARRAY_SIZE);
+        heapArray = (HeapElement[]) Array.newInstance(HeapElement.class, DEFAULT_ARRAY_SIZE);
     }
 
     @Override
@@ -25,10 +25,10 @@ public class SimpleHeap<T> extends Heap<T> {
                 heapArray[lastIdx] = heapArray[getParentIdx(lastIdx)];
                 lastIdx = getParentIdx(lastIdx);
             } else {
+                // 새로 들어온 데이터의 우선순위가 더 높다면
                 break;
             }
         }
-        // 새로 들어온 데이터의 우선순위가 더 높다면
         heapArray[lastIdx] = lastElement;
         numOfData++;
     }
@@ -38,9 +38,10 @@ public class SimpleHeap<T> extends Heap<T> {
         // idx는 삭제하고자 하는 인덱스
         int lastIdx = numOfData; // 마지막 자식 노드
         HeapElement<T> deleteHeap = this.heapArray[idx];
-        HeapElement<T> lastHeap = this.heapArray[lastIdx];
+        HeapElement<T> lastHeap =   this.heapArray[lastIdx];
 
         while(true) {
+            System.out.println(heapArray[getHiPriChildIdx(idx)]);
             if(heapArray[getHiPriChildIdx(idx)].getPr() > heapArray[lastIdx].getPr()) {
                 break;
             }
@@ -49,7 +50,7 @@ public class SimpleHeap<T> extends Heap<T> {
         }
 
         this.heapArray[idx] = lastHeap;
-        this.heapArray[lastIdx] = null;
+//        this.heapArray[lastIdx] = null;
 
         return deleteHeap.getData();
     }
