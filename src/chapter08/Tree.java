@@ -1,19 +1,30 @@
 package chapter08;
 
 public abstract class Tree<T> {
+    public TreeNode<T> makeBTreeNode(T data) {
+        TreeNode<T> newNode = new TreeNode<>(data);
+        return newNode;
+    }
 
+    public T getData(TreeNode<T> node) {
+        return node.getData();
+    }
 
-    public abstract TreeNode<T> makeBTreeNode(T t);
+    public TreeNode<T> getLeftSubTree(TreeNode<T> node) {
+        return node.getLeft();
+    }
 
-    public abstract T getData(TreeNode<T> node);
+    public TreeNode<T> getRightSubTree(TreeNode<T> node) {
+        return node.getRight();
+    }
 
-    public abstract TreeNode<T> getLeftSubTree(TreeNode<T> node);
+    public void makeLeftSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        main.setLeft(sub);
+    }
 
-    public abstract TreeNode<T> getRightSubTree(TreeNode<T> node);
-
-    public abstract void makeLeftSubTree(TreeNode<T> main, TreeNode<T> sub);
-
-    public abstract void makeRightSubTree(TreeNode<T> main, TreeNode<T> sub);
+    public void makeRightSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        main.setRight(sub);
+    }
 
     public void preorderTraverse(TreeNode<T> tree) {
         if (tree == null) return;
@@ -67,5 +78,29 @@ public abstract class Tree<T> {
         deleteTree(treeNode.getRight());
         return null;
     }
+    public TreeNode<T> removeLeftSubTree(TreeNode<T> btree) {
+        TreeNode<T> delNode = null;
+        if(btree != null) {
+            delNode = btree.getLeft();
+            btree.setLeft(null);
+        }
+        return delNode;
+    }
 
+    public TreeNode<T> removeRightSubTree(TreeNode<T> btree) {
+        TreeNode<T> delNode = null;
+        if(btree != null) {
+            delNode = btree.getRight();
+            btree.setRight(null);
+        }
+        return delNode;
+    }
+
+    public void changeLeftSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        main.setLeft(sub);
+    }
+
+    public void changeRightSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        main.setRight(sub);
+    }
 }

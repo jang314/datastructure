@@ -32,4 +32,8 @@ public class TreeNode<T> {
     public void setData(TreeNode<T> node) {
         this.data = node.getData();
     }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }
