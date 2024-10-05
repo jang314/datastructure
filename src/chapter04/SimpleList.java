@@ -3,9 +3,9 @@ package chapter04;
 import common.Node;
 
 public class SimpleList<T> {
-    private Node<T> head;
-    private Node<T> cur;
-    private Node<T> tail;
+    private Node<T> head = null;    // 리스트의 머리를 가리키는 변수
+    private Node<T> cur = null;     // 저장된 데이터의 조회에 사용되는 변수
+    private Node<T> tail = null;    // 리스트의 꼬리를 가리키는 변수
     private int totalCount;
 
 

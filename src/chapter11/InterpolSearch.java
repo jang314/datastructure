@@ -25,6 +25,8 @@ public class InterpolSearch {
 
         if(arr[first]>target||arr[last]<target) {
             return -1;
+
+
         }
         else if (target > arr[mid]) {
             return iSearch(first, mid-1, target,arr);

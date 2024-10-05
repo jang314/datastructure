@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class LinkedRead {
     public static void main(String[] args) {
-        SimpleList<Integer> list = new SimpleList<>();
+        chapter04.SimpleList<Integer> list = new SimpleList<>();
 
         Scanner scanner  = new Scanner(System.in);
         System.out.println("자연수 입력 : " );

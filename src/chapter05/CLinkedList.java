@@ -15,12 +15,13 @@ public class CLinkedList<T> {
     public void CRearInsert(T data) {
         Node<T> newNode = new Node<>(data);
 
-        if(tail == null) {
-            this.tail = new Node<>(data);
+        if(this.tail == null) {
+            this.tail = newNode;
             newNode.next = newNode;
         } else {
             newNode.next = this.tail.next;
             this.tail.next = newNode;
+            this.tail = newNode;
         }
         numOfData++;
     }
@@ -29,12 +30,12 @@ public class CLinkedList<T> {
         Node<T> newNode = new Node<>(data);
 
         if(tail == null) {
-            this.tail = new Node<>(data);
+            this.tail = newNode;
             newNode.next = newNode;
         } else {
-            newNode.next = this.tail;
-            tail.next = newNode;
-            tail = newNode;
+            newNode.next = this.tail.next;
+            this.tail.next = newNode;
+//            this.tail = newNode;
         }
         numOfData++;
     }
@@ -43,8 +44,10 @@ public class CLinkedList<T> {
         if(this.tail == null) {
             return false;
         }
+
         this.before = this.tail;
         this.cur = this.tail.next;
+
         return true;
     }
 

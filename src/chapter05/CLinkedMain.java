@@ -10,11 +10,11 @@ public class CLinkedMain {
         clist.CFrontInsert(1);
 
         if(clist.LFirst()) {
-            System.out.print(""+clist.getData());
+            System.out.printf("%d, ", clist.getData());
         }
         for(int i = 0 ; i< clist.LCount()*3-1; i++) {
             if(clist.LNext()) {
-                System.out.print(", " + clist.getData());
+                System.out.printf("%d, " , clist.getData());
             }
         }
 
