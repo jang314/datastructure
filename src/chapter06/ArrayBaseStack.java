@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 
 public class ArrayBaseStack<T> extends Stack<T> {
     private static final int STACK_LEN = 10;
-
     private T[] stackArray;
 
     public ArrayBaseStack(Class clz) {

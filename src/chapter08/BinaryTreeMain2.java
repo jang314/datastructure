@@ -21,8 +21,5 @@ public class BinaryTreeMain2 {
         tree.inorderTraverse(tree1, (data) -> System.out.printf("%d ", data));
         System.out.println();
         tree.postTraverse(tree1, (data) -> System.out.printf("%d ", data));
-
     }
-
-
 }

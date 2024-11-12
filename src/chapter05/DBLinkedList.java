@@ -2,6 +2,7 @@ package chapter05;
 
 import common.Node;
 
+
 public class DBLinkedList<T> {
     private Node<T> head;
     private Node<T> cur;
@@ -23,19 +24,20 @@ public class DBLinkedList<T> {
     }
     protected boolean lFirst() {
         if(this.head == null) return false;
-        this.cur = this.head;
+        this.cur = this.head;   // cur이 첫 번째 노드를 가리키게 함
         return true;
     }
+
     protected boolean lNext() {
         if(this.cur.next == null) return false;
-        this.cur = this.cur.next;
+        this.cur = this.cur.next;   // cur을 오른쪽으로 이동
 
         return true;
     }
 
     protected boolean lPrevious() {
         if(this.cur.prev == null) return false;
-        this.cur = this.cur.prev;
+        this.cur = this.cur.prev;   // cur을 왼쪽으로 이동
         return true;
     }
 

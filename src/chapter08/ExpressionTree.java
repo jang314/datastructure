@@ -1,6 +1,7 @@
 package chapter08;
 
 public class ExpressionTree<T> {
+    private static final Tree<String> tree = new BinaryTree<>();
 
     public static void main(String[] args) {
         String sik = "12+7*";
@@ -23,7 +24,6 @@ public class ExpressionTree<T> {
     }
 
     public static TreeNode<String> makeExpTree(char[] exp) {
-        Tree<String> tree = new BinaryTree<>();
         TreeNode<String> treeNode = null;
         TreeNode<String> left = null;
         TreeNode<String> right = null;
@@ -91,23 +91,23 @@ public class ExpressionTree<T> {
     }
 
     public static void showPrefixTypeExp(TreeNode<String> bt) {
-        if(bt == null) return;;
-        System.out.printf("%s ", bt.getData());
-        showPrefixTypeExp(bt.getLeft());
-        showPrefixTypeExp(bt.getRight());
+        tree.preorderTraverse(bt, (data) -> showNodeData(data));
     }
 
     public static void showInfixTypeExp(TreeNode<String> bt) {
-        if(bt == null) return;
-        showInfixTypeExp(bt.getLeft());
-        System.out.printf("%s ", bt.getData());
-        showInfixTypeExp(bt.getRight());
+        tree.inorderTraverse(bt, (data) -> showNodeData(data));
     }
 
     public static void showPostfixTypeExp(TreeNode<String> bt) {
-        if(bt == null) return;
-        showPostfixTypeExp(bt.getLeft());
-        showPostfixTypeExp(bt.getRight());
-        System.out.printf("%s ", bt.getData());
+        Tree<String> tree = new BinaryTree<>();
+        tree.postTraverse(bt, (data) -> showNodeData(data));
+    }
+
+    private static void showNodeData(String data) {
+        if(Character.isDigit(data.charAt(0))) {
+            System.out.printf("%d ", Integer.parseInt(data));
+        } else {
+            System.out.printf("%s ", data);
+        }
     }
 }

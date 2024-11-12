@@ -18,10 +18,10 @@ public class ListQueue<T> extends Queue<T>{
     @Override
     public void enqueue(T data) {
         Node<T> newNode = new Node<>(data);
-        if(this.front == null)  {
+        if(this.front == null)  { // 첫번째 노드 추가
             this.front = newNode;
             this.rear = newNode;
-        } else {
+        } else {    // 두번째 이후 노드 추가
             this.rear.next = newNode;
             this.rear = newNode;
         }

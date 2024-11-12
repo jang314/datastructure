@@ -35,19 +35,17 @@ public class CLinkedList<T> {
         } else {
             newNode.next = this.tail.next;
             this.tail.next = newNode;
-//            this.tail = newNode;
         }
         numOfData++;
     }
 
     public boolean LFirst() {
-        if(this.tail == null) {
+        if(this.tail == null) { // 저장된 노드가 없다면
             return false;
         }
 
-        this.before = this.tail;
-        this.cur = this.tail.next;
-
+        this.before = this.tail;    // before가 꼬리를 가리키게함
+        this.cur = this.tail.next;  // cur이 머리를 가리키게함
         return true;
     }
 
@@ -63,8 +61,8 @@ public class CLinkedList<T> {
 
     public T LRemove() {
         Node<T> delNode = this.cur;
-        if(delNode == this.tail) {
-            if(this.tail == this.tail.next) {
+        if(delNode == this.tail) {              // 삭제 대상을 tail이 가리킨다면
+            if(this.tail == this.tail.next) {   // 마지막 남은 노드라면
                 this.tail = null;
             } else {
                 this.tail = this.before;

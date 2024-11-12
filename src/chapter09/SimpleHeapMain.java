@@ -2,19 +2,30 @@ package chapter09;
 
 public class SimpleHeapMain {
     public static void main(String[] args) {
-        Heap<Character> heap = new SimpleHeap<>(String.class);
+        Heap<Character> heap = new Heap<>(Character.class, ((o1, o2) ->  {
+            char ch1 = (char) o1;
+            char ch2 = (char) o2;
+            return (int) ch2 - (int) ch1;
+        }));
 
-        HeapElement<Character> element1 = new HeapElement<>('A', 1);
-        HeapElement<Character> element2 = new HeapElement<>('B', 2);
-        HeapElement<Character> element3 = new HeapElement<>('C', 3);
-
-        heap.hInsert(element1);
-        heap.hInsert(element2);
-        heap.hInsert(element3);
+        heap.hInsert('A');
+        heap.hInsert('B');
+        heap.hInsert('C');
 
         while(!heap.hIsEmpty()) {
             char delete = heap.hDelete(1);
-            System.out.printf("%c " , delete);
+            System.out.printf("%c \n", delete);
         }
     }
 }
+
+//        heap.hInsert(new HeapElem<>('E'));
+//        heap.hInsert(new HeapElem<>('D'));
+//        heap.hInsert(new HeapElem<>('C'));
+//        heap.hInsert(new HeapElem<>('F'));
+//        heap.hInsert(new HeapElem<>('G'));
+//        heap.hInsert(new HeapElem<>('A'));
+//        heap.hInsert(new HeapElem<>('J'));
+//        heap.hInsert(new HeapElem<>('H'));
+//        heap.hInsert(new HeapElem<>('I'));
+//        heap.hInsert(new HeapElem<>('B'));
