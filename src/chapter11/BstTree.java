@@ -1,7 +1,10 @@
 package chapter11;
 
+import chapter08.BinaryTreeTraverse;
+import chapter08.Tree;
 import chapter08.TreeNode;
 
+import java.awt.print.Pageable;
 import java.util.Comparator;
 
 public class BstTree<T> extends BinarySearchTree<T> {
@@ -9,7 +12,7 @@ public class BstTree<T> extends BinarySearchTree<T> {
     private Comparator<T> comparator ;
 
     public BstTree(Comparator<T> comparator) {
-        this.root = new TreeNode<>(null);
+        this.root = null;
         this.comparator = comparator;
     }
 
@@ -20,54 +23,46 @@ public class BstTree<T> extends BinarySearchTree<T> {
 
     @Override
     protected void bstInsert(T data) {
-        if(root.getData() == null) {
-            root.setData(new TreeNode<>(data));
-            return;
-        }
-        TreeNode<T> pNode = null; // parentNode
-        TreeNode<T> cNode = root; // currentNode
-        TreeNode<T> nNode = null; // newNode
+        TreeNode<T> parNode = null;
+        TreeNode<T> newNode = new TreeNode<>(data);
+        TreeNode<T> curNode = this.root;
 
-
-        while(cNode != null) {
-            if(cNode.getData() == data) {
-                return;
+        while(curNode != null) {
+            if(curNode == newNode.getData()) {
+                return ;
             }
 
-            pNode = cNode;
+            parNode = curNode;
 
-            if(comparator.compare(cNode.getData(), data) > 0) {
-                cNode = getLeftSubTree(cNode);
+            if(comparator.compare(curNode.getData(), newNode.getData()) > 0) {
+                curNode = getLeftSubTree(curNode);
             } else {
-                cNode = getRightSubTree(cNode);
+                curNode = getRightSubTree(curNode);
             }
         }
 
-        // pNode의 자식 노드로 추가할 때 새노드의 생성
-        nNode = makeBTreeNode(data);
-
-        // pNode의 자식 노드로 새 노드를 추가
-        if(pNode != null) {
-            if(comparator.compare(pNode.getData(), data) > 0) {
-                makeLeftSubTree(pNode, nNode);
+        if(parNode == null) {
+            this.root = newNode ;
+        } else {
+            if(comparator.compare(parNode.getData(), newNode.getData()) > 0) {
+                makeLeftSubTree(parNode, newNode);
             } else {
-                makeRightSubTree(pNode, nNode);
+                makeRightSubTree(parNode,newNode);
             }
         }
     }
 
     @Override
-    protected TreeNode<T> bstSearch( T target) {
-        TreeNode<T> cNode = this.root;
-        T cd = null;
-        while(cNode != null) {
-            cd = cNode.getData();
-            if(target == cd) {
-                return cNode;
-            } else if(comparator.compare(cd, target) > 0) {
-                cNode = getLeftSubTree(cNode);
+    protected TreeNode<T> bstSearch(T target) {
+        TreeNode<T> curNode = this.root;
+
+        while(curNode!=null) {
+            if(curNode.getData() == target) {
+                return curNode;
+            } else if(comparator.compare(curNode.getData(), target) > 0) {
+                curNode = getLeftSubTree(curNode);
             } else {
-                cNode = getRightSubTree(cNode);
+                curNode = getRightSubTree(curNode);
             }
         }
         return null; // 탐색 대상이 저장되어 있지 않음.
@@ -75,6 +70,84 @@ public class BstTree<T> extends BinarySearchTree<T> {
 
     @Override
     protected TreeNode<T> bseRemove(T target) {
+        TreeNode<T> vRoot = new TreeNode<>(null);
+        TreeNode<T> delNode = null;
+        TreeNode<T> parNode = null;
+        TreeNode<T> curNode = root;
+
+        // 루트 노드 삭제 고려
+        makeRightSubTree(vRoot, this.root);
+
+        // 삭제 노드 탐색
+        while(curNode != null && curNode.getData() != target) {
+              parNode = curNode;
+              if(comparator.compare(curNode.getData(), target) > 0) {
+                  curNode = getLeftSubTree(curNode);
+              } else {
+                  curNode = getRightSubTree(curNode);
+              }
+        }
+
+        if(curNode == null) {
+            return null;
+        }
+
+        delNode = curNode;
+
+        // 1. 삭제 노드가 단말 노드일 때
+        if(getLeftSubTree(delNode) == null && getRightSubTree(delNode) == null) {
+            if(getLeftSubTree(parNode).getData().equals(target)) {
+                removeLeftSubTree(parNode);
+            } else {
+                removeRightSubTree(parNode);
+            }
+        }
+        // 2. 삭제 노드의 자식 노드가 하나일 때
+        else if(getLeftSubTree(delNode) == null || getRightSubTree(delNode) == null) {
+            TreeNode<T> cNode = getLeftSubTree(delNode) == null ? getRightSubTree(delNode) : getLeftSubTree(delNode);
+
+            if(getRightSubTree(parNode) != null && getLeftSubTree(parNode) != null) {
+                if(getLeftSubTree(parNode).getData().equals(delNode.getData())) {
+                    changeLeftSubTree(parNode, cNode);
+                } else {
+                    changeLeftSubTree(parNode, cNode);
+                }
+            } else {
+                if(getLeftSubTree(parNode) == null) {
+                    changeRightSubTree(parNode, cNode);
+                } else {
+                    changeLeftSubTree(parNode, cNode);
+                }
+            }
+        }
+        // 3. 삭제 노드의 자식 노드가 두개일 때
+        else {
+            TreeNode<T> fNode = getRightSubTree(delNode);
+            TreeNode<T> pfNode = delNode;
+//          1. 탐색
+            while(getLeftSubTree(fNode) != null) {
+                pfNode = fNode;
+                fNode = getLeftSubTree(fNode);
+            }
+
+            // 2. 대입
+            delNode.setData(fNode.getData());
+
+            if(getLeftSubTree(pfNode).getData().equals(fNode.getData())) {
+                changeLeftSubTree(pfNode, getRightSubTree(fNode));
+            } else {
+                changeRightSubTree(pfNode, getRightSubTree(fNode));
+            }
+
+            // 삭제 대상이 루트라면
+            if(!getRightSubTree(vRoot).getData().equals(this.root.getData())) {
+                this.root = getRightSubTree(vRoot);
+            }
+        }
+        return new TreeNode<>(target);
+    }
+//    @Override
+    protected TreeNode<T> bseRemove3(T target) {
         //삭제 대상이 루ㅡ 노드인 경우ㅡㄹ 별도로 고려해야함
         TreeNode<T> pVroot = makeBTreeNode(null); // 가상 뤁트 노드
         TreeNode<T> pNode = pVroot ; //parentNode
@@ -152,7 +225,7 @@ public class BstTree<T> extends BinarySearchTree<T> {
 
     @Override
     protected void bstShowAll() {
-
+        inorderTraverse(this.root, (data) -> System.out.printf("%d ", data));
     }
 
 

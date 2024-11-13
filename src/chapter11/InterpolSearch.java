@@ -13,11 +13,10 @@ public class InterpolSearch {
 
     private static int iSearch(int first, int last, int target, int... arr) {
         int mid = 0;
-        if(first > last) {
-            return -1;
-        }
 
         mid = (int)((double)(target - arr[first]) / (arr[last] - arr[first]) * (last-first)) + first;
+//        mid = ((target - arr[first]) / (arr[last] - arr[first]) * (last-first)) + first;
+        mid = (((target - arr[first]) * (last-first)) / (arr[last] - arr[first])) + first;
 
 //        if(arr[mid] == target) {
 //            return mid;
@@ -25,8 +24,9 @@ public class InterpolSearch {
 
         if(arr[first]>target||arr[last]<target) {
             return -1;
-
-
+        }
+        if(arr[mid] == target) {
+            return mid;
         }
         else if (target > arr[mid]) {
             return iSearch(first, mid-1, target,arr);

@@ -2,10 +2,12 @@ package chapter11;
 
 import chapter08.TreeNode;
 
+import java.util.Comparator;
+
 public class BinarySearchTreeMain {
     public static void main(String[] args) {
-
-        BinarySearchTree<Integer> bstTree = new BstTree<>((o1, o2) -> o1-o2);
+        Comparator<Integer> comp = (o1, o2) -> o1-o2;
+        BinarySearchTree<Integer> bstTree = new BstTree<>(comp);
 
         bstTree.bstInsert(9);
         bstTree.bstInsert(1);

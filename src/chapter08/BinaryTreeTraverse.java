@@ -33,9 +33,4 @@ public class BinaryTreeTraverse<T> extends Tree<T>{
     public void makeRightSubTree(TreeNode<T> main, TreeNode<T> sub) {
         main.setRight(sub);
     }
-
-    @FunctionalInterface
-    interface VisitFuncPtr<T> {
-       void action(T data);
-    }
 }

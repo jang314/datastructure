@@ -1,5 +1,8 @@
 package chapter08;
 
+import chapter11.BstTree;
+import common.VisitFuncPtr;
+
 public abstract class Tree<T> {
     /**
      * - 이진 트리 노드를 생성하고 데이터를 저장한다.
@@ -67,21 +70,21 @@ public abstract class Tree<T> {
         System.out.printf("%d \n", tree.getData());
     }
 
-    public void preorderTraverse(TreeNode<T> tree, BinaryTreeTraverse.VisitFuncPtr<T> action) {
+    public void preorderTraverse(TreeNode<T> tree, VisitFuncPtr<T> action) {
         if (tree == null) return;
         action.action(tree.getData());
         preorderTraverse(tree.getLeft(), action);
         preorderTraverse(tree.getRight(), action);
     }
 
-    public void inorderTraverse(TreeNode<T> tree, BinaryTreeTraverse.VisitFuncPtr<T> action) {
+    public void inorderTraverse(TreeNode<T> tree, VisitFuncPtr<T> action) {
         if (tree == null) return;
         inorderTraverse(tree.getLeft(), action);
         action.action(tree.getData());
         inorderTraverse(tree.getRight(), action);
     }
 
-    public void postTraverse(TreeNode<T> tree, BinaryTreeTraverse.VisitFuncPtr<T> action) {
+    public void postTraverse(TreeNode<T> tree, VisitFuncPtr<T> action) {
         if (tree == null) return;
 
         postTraverse(tree.getLeft(), action);
@@ -121,4 +124,5 @@ public abstract class Tree<T> {
     public void changeRightSubTree(TreeNode<T> main, TreeNode<T> sub) {
         main.setRight(sub);
     }
+
 }
