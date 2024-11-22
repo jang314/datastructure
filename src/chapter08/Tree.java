@@ -1,9 +1,11 @@
 package chapter08;
-
-import chapter11.BstTree;
 import common.VisitFuncPtr;
 
+import java.util.Comparator;
+
 public abstract class Tree<T> {
+    protected TreeNode<T> root;
+    protected Comparator<T> comparator ;
     /**
      * - 이진 트리 노드를 생성하고 데이터를 저장한다.
      * */
@@ -94,7 +96,6 @@ public abstract class Tree<T> {
 
     public TreeNode<T> deleteTree(TreeNode<T> treeNode) {
         if (treeNode == null) return null;
-
         deleteTree(treeNode.getLeft());
         deleteTree(treeNode.getRight());
         return null;
@@ -118,10 +119,16 @@ public abstract class Tree<T> {
     }
 
     public void changeLeftSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        if(sub != null && this.comparator.compare(main.getData(), sub.getData()) < 0) {
+            return;
+        }
         main.setLeft(sub);
     }
 
     public void changeRightSubTree(TreeNode<T> main, TreeNode<T> sub) {
+        if(sub != null && this.comparator.compare(main.getData(), sub.getData()) > 0) {
+            return ;
+        }
         main.setRight(sub);
     }
 

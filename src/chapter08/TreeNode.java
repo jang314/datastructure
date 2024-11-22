@@ -1,5 +1,6 @@
 package chapter08;
 
+
 public class TreeNode<T> {
     private TreeNode<T> left;
     private TreeNode<T> right;
@@ -26,7 +27,7 @@ public class TreeNode<T> {
     }
 
     public T getData() {
-        return data;
+        return data == null ? (T) "NULL" : data;
     }
 
     public void setData(TreeNode<T> node) {
@@ -36,4 +37,6 @@ public class TreeNode<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+
 }
