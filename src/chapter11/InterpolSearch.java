@@ -2,13 +2,13 @@ package chapter11;
 
 public class InterpolSearch {
     public static void main(String[] args) {
-        int idx = iSearch(0, 4, 7, 1,3,5,7,9);
+        int arr[] = {1,3,5,7,9};
+        int idx = iSearch(1, 4, 2, arr);
         if(idx == -1) {
             System.out.println("탐색 실패");
         } else {
             System.out.printf("타겟 저장 인덱스 : %d ", idx);
         }
-
     }
 
     private static int iSearch(int first, int last, int target, int... arr) {

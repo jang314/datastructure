@@ -3,13 +3,12 @@ package chapter11;
 import chapter08.BinaryTreeTraverse;
 import chapter08.Tree;
 import chapter08.TreeNode;
+import chapter12.AVLRebalance;
 
 import java.awt.print.Pageable;
 import java.util.Comparator;
-
 public class BstTree<T> extends BinarySearchTree<T> {
-    private TreeNode<T> root;
-    private Comparator<T> comparator ;
+
 
     public BstTree(Comparator<T> comparator) {
         this.root = null;
@@ -17,12 +16,7 @@ public class BstTree<T> extends BinarySearchTree<T> {
     }
 
     @Override
-    protected T bstGetData(TreeNode<T> btree) {
-        return (T) getData(btree);
-    }
-
-    @Override
-    protected void bstInsert(T data) {
+    public void bstInsert(T data) {
         TreeNode<T> parNode = null;
         TreeNode<T> newNode = new TreeNode<>(data);
         TreeNode<T> curNode = this.root;
@@ -53,7 +47,12 @@ public class BstTree<T> extends BinarySearchTree<T> {
     }
 
     @Override
-    protected TreeNode<T> bstSearch(T target) {
+    public T bstGetData(TreeNode<T> btree) {
+        return (T) getData(btree);
+    }
+
+    @Override
+    public TreeNode<T> bstSearch(T target) {
         TreeNode<T> curNode = this.root;
 
         while(curNode!=null) {
@@ -224,9 +223,22 @@ public class BstTree<T> extends BinarySearchTree<T> {
     }
 
     @Override
-    protected void bstShowAll() {
+    public void bstShowAll() {
         inorderTraverse(this.root, (data) -> System.out.printf("%d ", data));
     }
+
+    public TreeNode<T> getRoot() {
+        return this.root;
+    }
+
+    public Comparator<T> getComparator() {
+        return  this.comparator;
+    }
+
+    public void setRoot(TreeNode<T> root) {
+        this.root = root;
+    }
+
 
 
 }
