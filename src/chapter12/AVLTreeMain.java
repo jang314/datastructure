@@ -50,26 +50,6 @@ public class AVLTreeMain {
         showData(root);
         root = tree.bstSearch(2);
         showData(root);
-
-        System.out.println("this.root = " +tree.getRoot());
-
-        System.out.println("==============================");
-//        tree.bstInsert(7);
-//        root = tree.bstSearch(6);
-//        showData(root);
-//
-//        System.out.println("==============================");
-//
-//        tree.bstInsert(8);
-//        root = tree.bstSearch(7);
-//        showData(root);
-//        System.out.println("==============================");
-//
-//        tree.bstInsert(9);
-//        root = tree.bstSearch(8);
-//        showData(root);
-//        System.out.println("==============================");
-
     }
 
 

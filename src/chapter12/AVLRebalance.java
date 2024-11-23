@@ -30,6 +30,13 @@ public class AVLRebalance<T> extends BstTree<T> {
         return root;
     }
 
+
+    public TreeNode<T> bseRemove(T target) {
+        TreeNode<T> retNode = super.bseRemove(target);
+        rebalance(this.root);
+        return retNode;
+    }
+
     private TreeNode<T> rebalance(TreeNode<T> pNode) {
         int diffHeight = getHeightDiff(pNode);
         if(diffHeight > 1) {
@@ -56,8 +63,8 @@ public class AVLRebalance<T> extends BstTree<T> {
             return 0;
         }
 
-        int leftH = getHeight(getLeftSubTree(treeNode));
-        int rightH = getHeight(getRightSubTree(treeNode));
+        int leftH = getHeight(getLeftSubTree(treeNode)); // 왼쪽 서브 트리 높이 계산
+        int rightH = getHeight(getRightSubTree(treeNode));  // 오른쪽 서브 트리 높이 계산
 
         return leftH > rightH ? leftH + 1 : rightH + 1;
     }
@@ -91,8 +98,6 @@ public class AVLRebalance<T> extends BstTree<T> {
         return cNode;
     }
 
-
-
     public TreeNode<T> rotateLR(TreeNode pNode) {
         TreeNode<T> cNode = getLeftSubTree(pNode);
         changeRightSubTree(cNode, getLeftSubTree(cNode));
@@ -115,6 +120,4 @@ public class AVLRebalance<T> extends BstTree<T> {
         }
         return cNode;
     }
-
-
 }
