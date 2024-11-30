@@ -1,7 +1,6 @@
 package chapter04;
 
 import common.Node;
-
 import java.util.Comparator;
 
 public class DLinkedList<T> {
@@ -39,7 +38,7 @@ public class DLinkedList<T> {
         Node<T> predNode = this.head; // 더미 노드를 가리킴
 
         // 새 노드가 들어갈 위치를 찾기 위한 반복문
-        while(predNode.next != null && this.comp.compare(data, (T) predNode.next.data) == 1) {
+        while(predNode.next != null && this.comp.compare(data, (T) predNode.next.data) > 0) {
             predNode = predNode.next;   // 다음 노드로 이동
         }
 
@@ -71,7 +70,7 @@ public class DLinkedList<T> {
     /**
      * - 참조된 데이터의 다음데이터를 가리킨다.
      * - 순차적인 참조를 위해 반복 호출이 가능하다.
-     * - 참조를 새로 시작하려면 먼저 LFist() 호출해야 한다.
+     * - 참조를 새로 시작하려면 먼저 LFirst() 호출해야 한다.
      * - 참조 성공 시 true, 실패 시 false 반환
      * */
     public boolean LNext() {
